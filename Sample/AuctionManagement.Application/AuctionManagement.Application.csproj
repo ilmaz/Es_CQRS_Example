@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\Framework.Application\Framework.Application.csproj" />
+    <ProjectReference Include="..\AuctionManagement.Application.Contracts\AuctionManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\AuctionManagement.Domain\AuctionManagement.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="autofac" Version="6.0.0" />
+		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\AuctionManagement.Config\AuctionManagement.Config.csproj" />
+	  <ProjectReference Include="..\AuctionManagement.Gateways.RestApi\AuctionManagement.Gateways.RestApi.csproj" />
+	</ItemGroup>
+
+</Project>
