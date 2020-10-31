@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AuctionManagement.Domain.Model.Auctions
 {
     public interface IAuctionRepository
     {
-        Auction Get(Guid id);
-        void Add(Auction auction);
-        void Update(Auction auction);   //TODO: discuss update method
+        Task<Auction> Get(Guid id);
+        Task Add(Auction auction);
+        Task Update(Auction auction);   //TODO: discuss update method
     }
 }

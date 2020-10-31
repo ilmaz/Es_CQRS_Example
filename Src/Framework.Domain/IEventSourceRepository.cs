@@ -1,8 +1,10 @@
-﻿namespace Framework.Domain
+﻿using System.Threading.Tasks;
+
+namespace Framework.Domain
 {
     public interface IEventSourceRepository<T, TKey> where T : AggregateRoot<TKey>
     {
-        void AppendEvents(T aggregate);
-        T GetById(TKey id);
+        Task AppendEvents(T aggregate);
+        Task<T> GetById(TKey id);
     }
 }

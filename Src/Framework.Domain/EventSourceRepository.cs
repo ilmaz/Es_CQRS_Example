@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Framework.Domain
 {
@@ -12,17 +13,17 @@ namespace Framework.Domain
             _eventStore = eventStore;
             _aggregateFactory = aggregateFactory;
         }
-        public T GetById(TKey id)
+        public async Task<T> GetById(TKey id)
         {
-            var listOfEvents = _eventStore.GetEventsOfStream(GetStreamName(id));
+            var listOfEvents = await _eventStore.GetEventsOfStream(GetStreamName(id));
 
             return _aggregateFactory.Create<T>(listOfEvents);
         }
 
-        public void AppendEvents(T aggregate)
+        public async Task AppendEvents(T aggregate)
         {
             var events = aggregate.GetUncommittedEvents();
-            _eventStore.AppendEvents(GetStreamName(aggregate.Id), events);
+            await _eventStore.AppendEvents(GetStreamName(aggregate.Id), events);
         }
 
         private string GetStreamName(TKey id)

@@ -41,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{23525F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventStoreSample", "Sample-Demo\EventStoreSample\EventStoreSample.csproj", "{E6921C01-83EB-4D2B-AD07-9579DE287DA7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Persistence.ES", "Src\Framework.Persistence.ES\Framework.Persistence.ES.csproj", "{14476A5B-2833-4FC2-AC05-E0531E2D44D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{E6921C01-83EB-4D2B-AD07-9579DE287DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6921C01-83EB-4D2B-AD07-9579DE287DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6921C01-83EB-4D2B-AD07-9579DE287DA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14476A5B-2833-4FC2-AC05-E0531E2D44D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14476A5B-2833-4FC2-AC05-E0531E2D44D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14476A5B-2833-4FC2-AC05-E0531E2D44D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14476A5B-2833-4FC2-AC05-E0531E2D44D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +117,7 @@ Global
 		{8D8C0C79-9CF8-4290-9870-8213D5431CDB} = {B2A46608-C5C9-4BD5-9889-11BD35E8AB54}
 		{41697B61-34BE-4129-BAE8-339A9C72429C} = {B2A46608-C5C9-4BD5-9889-11BD35E8AB54}
 		{E6921C01-83EB-4D2B-AD07-9579DE287DA7} = {23525FB3-7C87-467F-9A5C-29CA5021F91C}
+		{14476A5B-2833-4FC2-AC05-E0531E2D44D0} = {F9759BD9-A325-464B-8249-084CC275909F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {38FB995E-E78E-4E03-B655-7A3AF848F838}

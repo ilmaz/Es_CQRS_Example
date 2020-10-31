@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AuctionManagement.Application.Contracts;
 using AuctionManagement.Domain.Model.Auctions;
 using Framework.Application;
@@ -13,18 +14,18 @@ namespace AuctionManagement.Application
         {
             _auctionRepository = auctionRepository;
         }
-        public void Handle(OpenAuction cmd)
+        public async Task Handle(OpenAuction cmd)
         {
             var id = Guid.NewGuid();
             var auction = new Auction(id, cmd.SellerId, cmd.StartingPrice, cmd.Product, cmd.EndDate);
-            _auctionRepository.Add(auction);
+            await _auctionRepository.Add(auction);
         }
 
-        public void Handle(PlaceBid command)
+        public async Task Handle(PlaceBid command)
         {
-            var auction = _auctionRepository.Get(command.AuctionId);
+            var auction = await _auctionRepository.Get(command.AuctionId);
             auction.PlaceBid(command.BidderId, command.Amount);
-            _auctionRepository.Update(auction);
+            await _auctionRepository.Update(auction);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Framework.Application;
+using System.Threading.Tasks;
 
 namespace AuctionManagement.Config
 {
@@ -11,10 +12,10 @@ namespace AuctionManagement.Config
             _scope = scope;
         }
 
-        public void Dispatch<T>(T command)
+        public async Task Dispatch<T>(T command)
         {
             var handler = _scope.Resolve<ICommandHandler<T>>();
-            handler.Handle(command);
+            await handler.Handle(command);
         }
     }
 }

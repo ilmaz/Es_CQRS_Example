@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AuctionManagement.Domain.Model.Auctions;
 using Framework.Domain;
 
@@ -11,19 +12,19 @@ namespace AuctionManagement.Persistence.ES
         {
             _repository = repository;
         }
-        public Auction Get(Guid id)
+        public async Task<Auction> Get(Guid id)
         {
-            return _repository.GetById(id);
+            return await _repository.GetById(id);
         }
 
-        public void Add(Auction auction)
+        public async Task Add(Auction auction)
         {
-            _repository.AppendEvents(auction);
+            await _repository.AppendEvents(auction);
         }
 
-        public void Update(Auction auction)
+        public async Task Update(Auction auction)
         {
-            _repository.AppendEvents(auction);
+            await _repository.AppendEvents(auction);
         }
     }
 }

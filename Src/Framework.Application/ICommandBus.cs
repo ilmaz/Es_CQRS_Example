@@ -1,7 +1,9 @@
-﻿namespace Framework.Application
+﻿using System.Threading.Tasks;
+
+namespace Framework.Application
 {
     public interface ICommandBus
     {
-        void Dispatch<T>(T command);
+        Task Dispatch<T>(T command);
     }
 }
