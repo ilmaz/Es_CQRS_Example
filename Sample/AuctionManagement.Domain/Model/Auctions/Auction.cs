@@ -1,8 +1,6 @@
-﻿using AuctionManagement.Domain.Model.Auctions.Events;
+﻿using System;
+using AuctionManagement.Domain.Contracts.Auctions;
 using Framework.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AuctionManagement.Domain.Model.Auctions
 {
@@ -16,7 +14,7 @@ namespace AuctionManagement.Domain.Model.Auctions
         private Auction() { }
         public Auction(Guid id, long sellerId, long startingPrice, string product, DateTime endDate)
         {
-            if (endDate < DateTime.Now) throw new Exception("end date cant be past !");
+            if (endDate < DateTime.Now) throw  new Exception("end date cant be past !");
 
             Causes(new AuctionOpened(id, sellerId, startingPrice, endDate, product));
         }
@@ -24,7 +22,7 @@ namespace AuctionManagement.Domain.Model.Auctions
         {
             var maxBid = this.StartingPrice;
             if (!FirstBid()) maxBid = this.WinningBid.Amount;
-
+            
             if (maxBid >= amount) throw new Exception("Invalid amount");
             if (this.SellerId == bidderId) throw new Exception("invalid bidder !!!");
             //.......
@@ -35,6 +33,6 @@ namespace AuctionManagement.Domain.Model.Auctions
         {
             return this.WinningBid == null;
         }
-
+    
     }
 }

@@ -1,4 +1,4 @@
-﻿using AuctionManagement.Domain.Model.Auctions.Events;
+﻿using AuctionManagement.Domain.Contracts.Auctions;
 using Framework.Domain;
 
 namespace AuctionManagement.Domain.Model.Auctions

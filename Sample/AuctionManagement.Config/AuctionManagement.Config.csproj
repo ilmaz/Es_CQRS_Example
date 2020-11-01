@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<ItemGroup>
-		<PackageReference Include="autofac" Version="6.0.0" />
-	</ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Src\Framework.Application\Framework.Application.csproj" />
-	  <ProjectReference Include="..\..\Src\Framework.Domain\Framework.Domain.csproj" />
-	  <ProjectReference Include="..\..\Src\Framework.Persistence.ES\Framework.Persistence.ES.csproj" />
-	  <ProjectReference Include="..\AuctionManagement.Application\AuctionManagement.Application.csproj" />
-	  <ProjectReference Include="..\AuctionManagement.Persistence.ES\AuctionManagement.Persistence.ES.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="autofac" Version="6.0.0" />
+  </ItemGroup>
 
-	<PropertyGroup>
-		<TargetFramework>netcoreapp3.1</TargetFramework>
-	</PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\Framework.Application\Framework.Application.csproj" />
+    <ProjectReference Include="..\..\Src\Framework.Domain\Framework.Domain.csproj" />
+    <ProjectReference Include="..\..\Src\Framework.Persistence.ES\Framework.Persistence.ES.csproj" />
+    <ProjectReference Include="..\AuctionManagement.Application\AuctionManagement.Application.csproj" />
+    <ProjectReference Include="..\AuctionManagement.Persistence.ES\AuctionManagement.Persistence.ES.csproj" />
+  </ItemGroup>
 
 </Project>

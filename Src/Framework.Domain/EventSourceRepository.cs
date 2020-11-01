@@ -7,7 +7,6 @@ namespace Framework.Domain
     {
         private readonly IEventStore _eventStore;
         private readonly IAggregateFactory _aggregateFactory;
-
         public EventSourceRepository(IEventStore eventStore, IAggregateFactory aggregateFactory)
         {
             _eventStore = eventStore;
@@ -16,7 +15,6 @@ namespace Framework.Domain
         public async Task<T> GetById(TKey id)
         {
             var listOfEvents = await _eventStore.GetEventsOfStream(GetStreamName(id));
-
             return _aggregateFactory.Create<T>(listOfEvents);
         }
 

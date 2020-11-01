@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Framework.Domain
 {
-    public abstract class AggregateRoot<T> : Entity<T>, IAggreteRoot
+    public abstract class AggregateRoot<T> : Entity<T>, IAggregateRoot
     {
         private List<DomainEvent> _uncommittedEvents;
-
-        public AggregateRoot()
+        protected AggregateRoot()
         {
-            _uncommittedEvents = new List<DomainEvent>();
+            this._uncommittedEvents = new List<DomainEvent>();    
         }
         public IReadOnlyList<DomainEvent> GetUncommittedEvents() => _uncommittedEvents.AsReadOnly();
+
         public void Causes(DomainEvent @event)
         {
             _uncommittedEvents.Add(@event);

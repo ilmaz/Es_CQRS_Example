@@ -1,4 +1,7 @@
-﻿using AuctionManagement.Application;
+﻿using System;
+using System.Linq;
+using AuctionManagement.Application;
+using AuctionManagement.Domain.Contracts.Auctions;
 using AuctionManagement.Domain.Model.Auctions;
 using AuctionManagement.Persistence.ES;
 using Autofac;
@@ -6,8 +9,6 @@ using EventStore.ClientAPI;
 using Framework.Application;
 using Framework.Domain;
 using Framework.Persistence.ES;
-using System;
-using System.Linq;
 
 namespace AuctionManagement.Config
 {
@@ -15,15 +16,17 @@ namespace AuctionManagement.Config
     {
         protected override void Load(ContainerBuilder builder)
         {
-            //TODO: --------------------Move To FRAMEWORK--------------------
+            //TODO: --------------------------MOVE TO FRAMEWORK-------------
             builder.Register(CreateEventStoreConnection).SingleInstance();
             builder.RegisterType<EventStoreDb>().As<IEventStore>().SingleInstance();
-            //builder.RegisterType<InMemoryEventStore>().As<IEventStore>().SingleInstance();
             builder.RegisterType<AutofacCommandBus>().As<ICommandBus>().SingleInstance();
             builder.RegisterType<AggregateFactory>().As<IAggregateFactory>().SingleInstance();
-            //TODO: --------------------Move To FRAMEWORK--------------------
-
-
+            builder.RegisterType<EventTypeResolver>().As<IEventTypeResolver>()
+                .SingleInstance().OnActivated(a =>
+                {
+                    a.Instance.AddTypesFromAssembly(typeof(BidPlaced).Assembly);
+                });
+            //TODO: --------------------------MOVE TO FRAMEWORK-------------
 
             builder.RegisterGeneric(typeof(EventSourceRepository<,>))
                 .As(typeof(IEventSourceRepository<,>)).SingleInstance();

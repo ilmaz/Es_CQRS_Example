@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
@@ -9,7 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework.Domain\Framework.Domain.csproj" />
+    <ProjectReference Include="..\..\Src\Framework.Persistence.ES\Framework.Persistence.ES.csproj" />
+    <ProjectReference Include="..\AuctionManagement.Domain.Contracts\AuctionManagement.Domain.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

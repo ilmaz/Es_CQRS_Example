@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AuctionManagement.Application.Contracts;
 using Framework.Application;
 using Microsoft.AspNetCore.Mvc;
@@ -16,17 +17,17 @@ namespace AuctionManagement.Gateways.RestApi
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] OpenAuction command)
+        public async Task<IActionResult> Post([FromBody]OpenAuction command)
         {
-            _bus.Dispatch(command);
+            await _bus.Dispatch(command);
             return Ok();
         }
 
         [HttpPost("{id}/Bids")]
-        public IActionResult Post(Guid id, PlaceBid command)
+        public async Task<IActionResult> Post(Guid id, PlaceBid command)
         {
             command.AuctionId = id;
-            _bus.Dispatch(command);
+            await _bus.Dispatch(command);
             return Ok();
         }
     }

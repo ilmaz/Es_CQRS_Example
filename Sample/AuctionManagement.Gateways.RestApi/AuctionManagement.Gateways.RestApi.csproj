@@ -4,13 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="microsoft.aspnetcore" Version="2.2.0" />
-		<PackageReference Include="microsoft.aspnetcore.mvc" Version="2.2.0" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="microsoft.aspnetcore" Version="2.2.0" />
+    <PackageReference Include="microsoft.aspnetcore.mvc" Version="2.2.0" />
+  </ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Src\Framework.Application\Framework.Application.csproj" />
-	  <ProjectReference Include="..\AuctionManagement.Application.Contracts\AuctionManagement.Application.Contracts.csproj" />
-	</ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\Framework.Application\Framework.Application.csproj" />
+    <ProjectReference Include="..\AuctionManagement.Application.Contracts\AuctionManagement.Application.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

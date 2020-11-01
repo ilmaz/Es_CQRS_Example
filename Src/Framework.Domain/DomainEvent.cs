@@ -8,8 +8,8 @@ namespace Framework.Domain
         public DateTime PublishDateTime { get; private set; }
         protected DomainEvent()
         {
-            PublishDateTime = DateTime.Now;
-            EventId = Guid.NewGuid();
+            this.PublishDateTime = DateTime.Now;
+            this.EventId  = Guid.NewGuid();    
         }
     }
 }

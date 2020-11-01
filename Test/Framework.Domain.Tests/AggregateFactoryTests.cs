@@ -1,145 +1,107 @@
-﻿using FluentAssertions;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
+using System.Globalization;
+using FizzWare.NBuilder;
+using FluentAssertions;
 using Xunit;
 
 namespace Framework.Domain.Tests
 {
     public class AggregateFactoryTests
     {
-        //[Fact]
-        //public void just_for_class()
-        //{
-        //    //==>Load & Replay Events
-        //    var userRegistered = new UserRegistered() { UserName = "Admin", FirstName = "ilmaz", LastNAme = "sourani" };
-        //    //var userActivated = new UserActivated() { UserId = 1 };
-
-        //    var user = new User();
-        //    user.Apply(userRegistered);
-
-
-        //    //user.Apply(userActivated);
-
-        //    //user.UserName.Should().Be("Admin");
-        //    //user.FirstName.Should().Be("ilmaz");
-        //    //user.LastNAme.Should().Be("sourani");
-        //    //user.IsActive.Should().BeTrue();
-
-
-        //    user.Activate();
-
-        //    //Save Events into DataBase
-        //    var events = user.GetUncommittedEvents();
-        //}
-
         [Fact]
         public void creates_aggregate_by_applying_events()
         {
             var events = new List<DomainEvent>()
             {
-                new UserRegistered(1,"admin","ilmaz","sourani"),
+                new UserRegistered(1, "admin", "john", "doe"),
                 new UserActivated(1),
-                new UserPersonalInfoUpdated("araz","s")
+                new UserPersonalInfoUpdated("jack", "doe")
             };
-
             var factory = new AggregateFactory();
 
             var user = factory.Create<User>(events);
 
-            user.UserName.Should().Be("admin");
-            user.FirstName.Should().Be("araz");
-            user.LastNAme.Should().Be("s");
             user.IsActive.Should().BeTrue();
+            user.Firstname.Should().Be("jack");
+            user.Lastname.Should().Be("doe");
+            user.Username.Should().Be("admin");
         }
-    }
+    }   
 
     public class User : AggregateRoot<long>
     {
-        //public long Id { get; private set; }
-        public string UserName { get; private set; }
-        public string FirstName { get; private set; }
-        public string LastNAme { get; private set; }
-        public bool IsActive { get; private set; }
-
-        private User()
-        {
-
-        }
-
+        public string Username { get; private set; }
+        public string Firstname { get; private set; }
+        public string Lastname { get;private  set; }
+        public bool IsActive { get;  private set; }
+        private User() { }
         public void Activate()
         {
-            //Some Invariants...
-
-            Causes(new UserActivated(Id));
+            Causes(new UserActivated(this.Id));
         }
-
         public void ChangePersonalInfo(string firstname, string lastname)
         {
-            if (!IsActive)
-                throw new Exception();
+            if (!this.IsActive)
+                throw new Exception(".......");
 
             Causes(new UserPersonalInfoUpdated(firstname, lastname));
         }
-
         public override void Apply(DomainEvent @event)
         {
             When((dynamic)@event);
         }
-
         private void When(UserRegistered @event)
         {
-            Id = @event.Id;
-            UserName = @event.UserName;
-            FirstName = @event.FirstName;
-            LastNAme = @event.LastNAme;
-            IsActive = false;
+            this.Id = @event.Id;
+            this.Firstname = @event.Firstname;
+            this.Lastname = @event.Lastname;
+            this.Username = @event.Username;
+            this.IsActive = false;
         }
-
         private void When(UserActivated @event)
         {
-            IsActive = true;
+            this.IsActive = true;
         }
-
         private void When(UserPersonalInfoUpdated @event)
         {
-            FirstName = @event.FirstName;
-            LastNAme = @event.LastNAme;
+            this.Firstname = @event.Firstname;
+            this.Lastname = @event.Lastname;
         }
     }
-
-    public class UserPersonalInfoUpdated : DomainEvent
-    {
-        public string FirstName { get; private set; }
-        public string LastNAme { get; private set; }
-
-        public UserPersonalInfoUpdated(string firstName, string lastNAme)
-        {
-            FirstName = firstName;
-            LastNAme = lastNAme;
-        }
-    }
-
     public class UserRegistered : DomainEvent
     {
-        public long Id { get; private set; }
-        public string UserName { get; private set; }
-        public string FirstName { get; private set; }
-        public string LastNAme { get; private set; }
-
-        public UserRegistered(long id, string userName, string firstName, string lastNAme)
+        public long Id { get;private set; }
+        public string Username { get; private set; }
+        public string Firstname { get; private set; }
+        public string Lastname { get; private set; }
+        public UserRegistered(long id, string username, string firstname, string lastname)
         {
             Id = id;
-            UserName = userName;
-            FirstName = firstName;
-            LastNAme = lastNAme;
+            Username = username;
+            Firstname = firstname;
+            Lastname = lastname;
         }
     }
+    public class UserPersonalInfoUpdated : DomainEvent
+    {
+        public string Firstname { get;  set; }
+        public string Lastname { get; set; }
 
+        public UserPersonalInfoUpdated()
+        {
+            
+        }
+        public UserPersonalInfoUpdated(string firstname, string lastname)
+        {
+            Firstname = firstname;
+            Lastname = lastname;
+        }
+    }
     public class UserActivated : DomainEvent
     {
         public long UserId { get; private set; }
-
         public UserActivated(long userId)
         {
             UserId = userId;

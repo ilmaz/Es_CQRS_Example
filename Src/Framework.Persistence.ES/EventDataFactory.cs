@@ -13,14 +13,13 @@ namespace Framework.Persistence.ES
         public static EventData CreateFromDomainEvent(DomainEvent domainEvent)
         {
             var data = JsonConvert.SerializeObject(domainEvent);
-
             return new EventData(
-                           eventId: domainEvent.EventId,
-                           type: domainEvent.GetType().Name,
-                           isJson: true,
-                           data: Encoding.UTF8.GetBytes(data),
-                           metadata: new byte[] { }
-                       );
+                eventId: domainEvent.EventId,
+                type: domainEvent.GetType().Name,
+                isJson: true,
+                data: Encoding.UTF8.GetBytes(data),
+                metadata: new byte[] {}
+            );
         }
 
         public static List<EventData> CreateFromDomainEvents(IEnumerable<DomainEvent> domainEvent)
