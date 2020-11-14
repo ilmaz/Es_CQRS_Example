@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace ServiceHost.Controllers
+namespace ServiceHost.Controllers.V2
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v2/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

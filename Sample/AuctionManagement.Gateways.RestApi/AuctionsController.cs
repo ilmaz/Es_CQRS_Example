@@ -4,10 +4,11 @@ using AuctionManagement.Application.Contracts;
 using Framework.Application;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AuctionManagement.Gateways.RestApi
+namespace AuctionManagement.Gateways.RestApi.V2
 {
     [ApiController]
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
+    [Route("api/v2/[controller]")]
     public class AuctionsController : Controller
     {
         private readonly ICommandBus _bus;
@@ -17,7 +18,7 @@ namespace AuctionManagement.Gateways.RestApi
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]OpenAuction command)
+        public async Task<IActionResult> Post([FromBody] OpenAuction command)
         {
             await _bus.Dispatch(command);
             return Ok();
